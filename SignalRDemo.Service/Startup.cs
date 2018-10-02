@@ -25,6 +25,15 @@ namespace SignalRDemo.Service
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
+            services.AddCors(options => options.AddPolicy("CorsPolicy",
+            builder =>
+            {
+                builder.AllowAnyMethod().AllowAnyHeader()
+                       .WithOrigins("http://localhost:64983")
+                       .AllowCredentials();
+            }));
+
             // PM> Install-Package Microsoft.AspNetCore.SignalR.Protocols.MessagePack
             services
                 .AddSignalR();
@@ -41,12 +50,7 @@ namespace SignalRDemo.Service
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseCors(builder => {
-                builder.WithOrigins("http://localhost:64983/")
-                .AllowAnyMethod()
-                .AllowAnyHeader()
-                    .AllowCredentials();
-            });
+            app.UseCors("CorsPolicy");
 
             app.UseSignalR(routes =>
             {
