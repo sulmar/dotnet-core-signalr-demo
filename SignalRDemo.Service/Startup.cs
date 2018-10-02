@@ -41,6 +41,13 @@ namespace SignalRDemo.Service
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseCors(builder => {
+                builder.WithOrigins("http://localhost:64983/")
+                .AllowAnyMethod()
+                .AllowAnyHeader()
+                    .AllowCredentials();
+            });
+
             app.UseSignalR(routes =>
             {
                 routes.MapHub<MessagesHub>("/messages");
