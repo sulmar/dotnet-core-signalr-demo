@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 
-namespace SignalRDemo.Service
+namespace SignalRDemo.WebClient
 {
     public class Program
     {
